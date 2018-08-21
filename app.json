@@ -1,29 +1,36 @@
 {
-  "pages":[
-   
+  "pages": [
     "pages/index/index",
     "pages/mine/mine",
+    "pages/release/release",
     "pages/logs/logs"
   ],
-  "window":{
+  "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#67BB62",
     "navigationBarTitleText": "顺路呀",
     "navigationBarTextStyle": "black"
   },
- "tabBar": {
- 	"list": [{
- 			"pagePath": "pages/index/index",
- 			"text": "首页",
- 			"iconPath": "images/car.png",
- 			"selectedIconPath": "images/car-.png"
- 		},
- 		{
- 			"pagePath": "pages/mine/mine",
- 			"text": "我的",
- 			"iconPath": "images/mine.png",
- 			"selectedIconPath": "images/mine-.png"
- 		}
- 	]
- }
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/car.png",
+        "selectedIconPath": "images/car-.png"
+      },
+      {
+        "pagePath": "pages/release/release",
+        "text": "发布",
+        "iconPath": "images/add.png",
+        "selectedIconPath": "images/add-.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine-.png"
+      }
+    ]
+  }
 }

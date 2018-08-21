@@ -6,10 +6,11 @@ Page({
 		motto: 'Hello World',
 		userInfo: {},
 		hasUserInfo: false,
-    tabs: ["人找车", "车找人", "筛选"],
+    tabs: ["人找车", "车找人"],
 		activeIndex: 0,
 		sliderOffset: 0,
 		sliderLeft: 0,
+		findPeopleArr:[],
 		findCarArr:[],
 		canIUse: wx.canIUse('button.open-type.getUserInfo')
 	},
@@ -28,14 +29,26 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success: function (res) {
-        console.log(res.data)
         if(res.data.code === "200"){
 					_this.setData({
-						findCarArr:res.data.data_peoMsg
+						findPeopleArr:res.data.data_peoMsg
 					})
 				} 
       }
     }) 
+		wx.request({
+			url: 'http://118.25.63.70:80/shunluya/wechat/findCar',
+			header: {
+				'content-type': 'application/json' // 默认值
+			},
+			success: function (res) {
+				if(res.data.code === "200"){
+					_this.setData({
+						findCarArr:res.data.data_carMsg
+					})
+				} 
+			}
+		}) 
 		if (app.globalData.userInfo) {
 			this.setData({
 				userInfo: app.globalData.userInfo,
