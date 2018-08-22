@@ -1090,7 +1090,7 @@ icon {
 	content: " ";
 	left: 0;
 	bottom: 0;
-	width: 6em;
+	width: 33.33%;
 	height: 3px;
 	background-color: #1aad19;
 	-webkit-transition: -webkit-transform .3s;

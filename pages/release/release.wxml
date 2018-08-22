@@ -1,2 +1,50 @@
-<!--pages/release/release.wxml-->
-<text>pages/release/release.wxml</text>
+<view class="release">
+	<!-- <button class="weui-btn" type="default" plain="true" style="margin-top: 20px;">车找人</button>
+	<button class="weui-btn" type="primary" plain="true">人找车</button> -->
+	<view class="findCar">
+		<view class="sec">
+			<label class="radio" wx:for="{{types}}">
+				<radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+			</label>
+		</view>
+		<view class="sec">
+			<text class="section__title">出行日期</text>
+			<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange" style="display: inline-block;margin-left: 10px;">
+				<view class="picker">{{date}}</view>
+			</picker>
+		</view>
+		<view class="sec">
+			<text class="section__title">出行时间</text>
+			<picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange" style="display: inline-block;margin-left: 10px;">
+				<view class="picker">{{time}}</view>
+			</picker>
+		</view>
+		<view class="sec">
+			<text>乘车人数</text>
+			<input type="number" style="display: inline-block;vertical-align:top;margin-left:10px;" value="{{busPeoNum}}" />
+		</view>
+		<view class="sec">
+			<text class="section__title">出发地点</text>
+			<picker style="display: inline-block;margin-left: 10px;" mode="region" bindchange="bindRegionChangeArrive " value="{{regionArrive}}"
+			    custom-item="{{customItem}}">
+				<view class="picker">{{regionArrive[0]}}，{{regionArrive[1]}}，{{regionArrive[2]}}</view>
+			</picker>
+		</view>
+		<view class="sec">
+			<text class="section__title">到达地点</text>
+			<picker style="display: inline-block;margin-left: 10px;" mode="region" bindchange="bindRegionChangeGo" value="{{regionGo}}"
+			    custom-item="{{customItem}}">
+				<view class="picker">{{regionGo[0]}}，{{regionGo[1]}}，{{regionGo[2]}}</view>
+			</picker>
+		</view>
+		<view class="sec">
+			<text class="section__title">有行李</text>
+			<switch checked bindchange="switch1Change" style="margin-left: 10px;" />
+		</view>
+		<view class="sec">
+			<text class="section__title">误差在30分钟之内</text>
+			<switch bindchange="switch2Change" style="margin-left: 10px;" />
+		</view>
+	</view>
+	<view class="findPeople"></view>
+</view>

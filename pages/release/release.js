@@ -1,66 +1,41 @@
 // pages/release/release.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-  
+    date: '2016-09-01',
+    time: '12:01',
+	regionArrive: ['广东省', '广州市', '海珠区'],
+	regionGo: ['广东省', '广州市', '海珠区'],
+	customItem: '全部',
+	busPeoNum:1,
+	types: [
+      {name: '1', value: '人找车'},
+      {name: '2', value: '车找人', checked: 'true'},
+    ]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
+  bindDateChange: function(e) {
+    this.setData({
+      date: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
+  bindTimeChange: function(e) {
+    this.setData({
+      time: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+  bindRegionChangeArrive: function (e) {
+    this.setData({
+      regionArrive: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  bindRegionChangeGo: function (e) {
+    this.setData({
+      regionGo: e.detail.value
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  switch1Change: function (e){
+    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  switch2Change: function (e){
+  console.log('switch1 发生 change 事件，携带值为', e.detail.value)
   }
 })

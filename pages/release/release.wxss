@@ -1,1 +1,10 @@
 /* pages/release/release.wxss */
+.release button{
+	width: 60%;
+}
+.sec{
+   background:#EEEEEE;
+   margin:20rpx;
+   padding:20rpx
+
+}

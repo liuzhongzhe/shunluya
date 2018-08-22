@@ -6,7 +6,7 @@ Page({
 		motto: 'Hello World',
 		userInfo: {},
 		hasUserInfo: false,
-    tabs: ["人找车", "车找人"],
+    tabs: ["人找车", "车找人","筛选"],
 		activeIndex: 0,
 		sliderOffset: 0,
 		sliderLeft: 0,
