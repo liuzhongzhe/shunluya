@@ -2,7 +2,7 @@
 Page({
 	data: {
 		addInfo: {
-			date: '2018-08-23',
+			date: '2018-08-26',
 			time: '12:01',
 			busPeoNum: 1,
 			types: [{
@@ -21,7 +21,7 @@ Page({
 			endAddressvalue: '',
 			isBag: 0,
 			isLose: 0,
-			respon_class: 0
+			respon_class: 1
 
 		},
 	},
@@ -114,7 +114,7 @@ Page({
 				endAddressvalue: _data.endAddressvalue,
 				bag: _data.isBag,
 				lose: _data.isLose,
-				respon_class: _data.respon_class,
+				respon_class: 2,
 			},
 			success: function (res) {
 				console.log(res)
