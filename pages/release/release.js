@@ -18,7 +18,9 @@ Page({
 			addressGoArr: ["石台", "池州", "铜陵", "安庆", "合肥", "贵池火车站"],
 			addressArr: [],
 			startAddressvalue: '',
+			startAddressName: '',
 			endAddressvalue: '',
+			endAddressName: '',
 			isBag: 0,
 			isLose: 0,
 			respon_class: 1
@@ -42,7 +44,7 @@ Page({
 		})
 	},
 	onLaunch: function () {
-	
+
 	},
 	bindDateChange: function (e) {
 		let _this = this
@@ -65,15 +67,16 @@ Page({
 	bindRegionChangeArrive: function (e) {
 		let _this = this
 		this.setData({
-			'addInfo.startAddressvalue': _this.data.addInfo.addressArr[e.detail.value].id
+			'addInfo.startAddressvalue': _this.data.addInfo.addressArr[e.detail.value].id,
+			'addInfo.startAddressName': _this.data.addInfo.addressArr[e.detail.value].address
 		})
 	},
 	bindRegionChangeGo: function (e) {
 		let _this = this
 		this.setData({
-			'addInfo.endAddressvalue': _this.data.addInfo.addressArr[e.detail.value].id
+			'addInfo.endAddressvalue': _this.data.addInfo.addressArr[e.detail.value].id,
+			'addInfo.endAddressName': _this.data.addInfo.addressArr[e.detail.value].address
 		})
-		console.log(_this.data.addInfo)
 	},
 	switch1Change: function (e) {
 		if (e.detail.value) {
@@ -101,10 +104,10 @@ Page({
 		let _this = this
 		let _data = _this.data.addInfo
 		wx.request({
-			url: 'http://118.25.63.70:80/shunluya/wechat/addMsg',
+			url: 'http://118.25.63.70/shunluya/wechat/addMsg',
 			method: 'POST',
 			header: {
-				'content-type': 'application/json' // 默认值
+				'content-type': 'application/json',
 			},
 			data: {
 				date: _data.date,

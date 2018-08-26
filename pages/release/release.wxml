@@ -24,18 +24,16 @@
 			<input type="number" style="display: inline-block;vertical-align:top;margin-left:10px;" value="{{addInfo.busPeoNum}}" />
 		</view>
 		<view class="sec">
-			<text class="section__title">出发地点</text>
 			<picker bindchange="bindRegionChangeArrive" value="{{index}}" range="{{addInfo.addressGoArr}}">
 				<view class="picker">
-					当前选择：{{addInfo.addressGoArr[index]}}
+					出发地点：{{addInfo.startAddressName}}
 				</view>
 			</picker>
 		</view>
 		<view class="sec">
-			<text class="section__title">到达地点</text>
 			<picker bindchange="bindRegionChangeGo" value="{{index}}" range="{{addInfo.addressGoArr}}">
 				<view class="picker">
-					当前选择：{{addInfo.addressGoArr[index]}}
+				到达地点：{{addInfo.endAddressName}}
 				</view>
 			</picker>
 		</view>

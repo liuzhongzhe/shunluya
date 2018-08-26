@@ -19,12 +19,13 @@ App({
 							grant_type:'authorization_code'
     				},
 						success:function(resp){
+							console.log(resp)
 							wx.request({
-                url:'http://118.25.63.70:80/shunluya//wechatUser/userLogin',
-                // method: 'POST',
-								data:{
-									openid:resp.data.openid
-								},
+                url:'http://118.25.63.70:80/shunluya//wechatUser/userLogin?openid=' + resp.data.openid,
+                method: 'POST',
+// 								data:{
+// 									openid:resp.data.openid
+// 								},
 								success:function(response){
 									console.log(response)
 								}
