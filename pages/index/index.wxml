@@ -14,7 +14,7 @@
 				<view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 					<view class="weui-panel weui-panel_access">
 						<view class="weui-panel__bd">
-							<navigator wx:for="{{findCarArr}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+							<navigator wx:for="{{findCarArr}}" wx:key="index" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
 								<view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
 									<view class="weui-media-box__title" style="font-size: 0.9em;">{{item.stratName}}-{{item.endName}}</view>
 									<view class="weui-media-box__desc">今天15:30
@@ -42,7 +42,7 @@
 				<view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 					<view class="weui-panel weui-panel_access">
 						<view class="weui-panel__bd">
-							<navigator wx:for="{{findPeopleArr}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+							<navigator wx:for="{{findPeopleArr}}" wx:key="index"class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
 								<view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
 									<view class="weui-media-box__title" style="font-size: 0.9em;">{{item.stratName}}-{{item.endName}}</view>
 									<view class="weui-media-box__desc">今天15:30

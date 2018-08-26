@@ -1,6 +1,9 @@
-// pages/release/release.js
+var app=getApp();
+
 Page({
 	data: {
+		token: '',
+    loginShow:false,
 		addInfo: {
 			date: '2018-08-26',
 			time: '12:01',
@@ -24,10 +27,14 @@ Page({
 			isBag: 0,
 			isLose: 0,
 			respon_class: 1
-
 		},
 	},
 	onLoad: function () {
+		setTimeout(()=>{
+      _this.setData({
+        'token': app.globalData
+      })
+		},2000)
 		let _this = this
 		wx.request({
 			url: 'http://118.25.63.70:80/shunluya/wechat/getAddress',
@@ -44,7 +51,6 @@ Page({
 		})
 	},
 	onLaunch: function () {
-
 	},
 	bindDateChange: function (e) {
 		let _this = this
@@ -101,13 +107,17 @@ Page({
 		}
 	},
 	addItem: function () {
-		let _this = this
+    let _this = this
+    if(!_this.data.token){
+      this.data.loginShow=true
+      return
+    }
 		let _data = _this.data.addInfo
 		wx.request({
 			url: 'http://118.25.63.70/shunluya/wechat/addMsg',
 			method: 'POST',
 			header: {
-				'content-type': 'application/json',
+				'content-type': 'application/x-www-form-urlencoded',
 			},
 			data: {
 				date: _data.date,
@@ -118,6 +128,7 @@ Page({
 				bag: _data.isBag,
 				lose: _data.isLose,
 				respon_class: 2,
+				token:this.data.token
 			},
 			success: function (res) {
 				console.log(res)

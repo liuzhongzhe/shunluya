@@ -12,7 +12,26 @@ page {
 icon {
 	vertical-align: middle
 }
-
+.dialog_login_wrapper{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.3);
+	z-index: 8;
+}
+.dialog_login{
+	width: 90%;
+	z-index: 10;
+	background: rgba(255,255,255,1);
+	position: absolute;
+	top: 100px;
+	margin-left: 3%;
+	padding: 2%;
+	border-radius: 4px;
+	
+}
 .weui-cells {
 	position: relative;
 	margin-top: 1.17647059em;

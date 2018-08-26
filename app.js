@@ -5,38 +5,34 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    // 登录
-    wx.login({
-    	success: function (res) {
-        console.log(res)
-    		if (res.code) {
-    			wx.request({
-    				url: 'https://api.weixin.qq.com/sns/jscode2session',
-    				data: {
-    					js_code: res.code,
-							appid:'wx10efdd909880ed5a',
-							secret:'30da574f457f38cae763d380e5ca448c',
-							grant_type:'authorization_code'
-    				},
-						success:function(resp){
-							console.log(resp)
+		
+		//登陆
+		wx.login({
+			success: res => {
+				if (res.code) {
+					wx.request({
+						url: 'https://api.weixin.qq.com/sns/jscode2session',
+						data: {
+							js_code: res.code,
+							appid: 'wx10efdd909880ed5a',
+							secret: '30da574f457f38cae763d380e5ca448c',
+							grant_type: 'authorization_code'
+						},
+						success: resp => {
 							wx.request({
-                url:'http://118.25.63.70:80/shunluya//wechatUser/userLogin?openid=' + resp.data.openid,
-                method: 'POST',
-// 								data:{
-// 									openid:resp.data.openid
-// 								},
-								success:function(response){
-									console.log(response)
+								url: 'http://118.25.63.70:80/shunluya//wechatUser/userLogin?openid=' + resp.data.openid,
+								method: 'POST',
+								success: response => {
+									this.globalData.token = response.data.data
 								}
 							})
 						}
-    			})
-    		} else {
-    			console.log('登录失败！' + res.errMsg)
-    		}
-    	}
-    });
+					})
+				} else {
+					console.log('登录失败！' + res.errMsg)
+				}
+			}
+		});
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -46,7 +42,6 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -59,6 +54,7 @@ App({
     })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+		token:''
   }
 })

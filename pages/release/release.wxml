@@ -1,4 +1,14 @@
 <view class="release">
+	<view class="dialog_login_wrapper" wx:if="{{loginShow}}">
+		<view class="dialog_login">
+			<view style="text-align: center;">请注册   <icon type="cancel" style="float: right;margin-top: 5px;"/> </view>
+			 <input style="display: inline-block; height: 30px;"  class="weui-input" placeholder="请输入手机号码" />
+			 <button class="weui-btn mini-btn" type="primary" plain="true" style="margin-top: 10px; float: right; vertical-align: top; width: 80px;padding: 2px;" size="mini">发送验证码</button>
+			<input  style="display: inline-block; height: 30px;" class="weui-input" placeholder="请输入验证码" />
+			<button class="weui-btn" type="primary"style="float: right; margin-top: 10px; vertical-align: top; width: 80px;padding: 2px;" size="mini">确定</button>
+
+		</view>
+	</view>
 	<view class="findCar">
 		<view class="sec">
 			<radio-group class="radio-group" bindchange="radioChange">

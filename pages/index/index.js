@@ -6,13 +6,14 @@ Page({
 		motto: 'Hello World',
 		userInfo: {},
 		hasUserInfo: false,
-    tabs: ["人找车", "车找人","筛选"],
+		tabs: ["人找车", "车找人", "筛选"],
 		activeIndex: 0,
 		sliderOffset: 0,
 		sliderLeft: 0,
-		findPeopleArr:[],
-		findCarArr:[],
-		canIUse: wx.canIUse('button.open-type.getUserInfo')
+		findPeopleArr: [],
+		findCarArr: [],
+		canIUse: wx.canIUse('button.open-type.getUserInfo'),
+		token: ''
 	},
 	//事件处理函数
 	bindViewTap: function () {
@@ -20,35 +21,34 @@ Page({
 			url: '../logs/logs'
 		})
 	},
-
 	onLoad: function () {
 		let _this = this
-    wx.request({
-      url: 'http://118.25.63.70:80/shunluya/wechat/findPeople',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success: function (res) {
-        if(res.data.code === "200"){
+		wx.request({
+			url: 'http://118.25.63.70:80/shunluya/wechat/findPeople',
+			header: {
+				'content-type': 'application/json' // 默认值
+			},
+			success: function (res) {
+				if (res.data.code === "200") {
 					_this.setData({
-						findPeopleArr:res.data.data_peoMsg
+						findPeopleArr: res.data.data_peoMsg
 					})
-				} 
-      }
-    }) 
+				}
+			}
+		})
 		wx.request({
 			url: 'http://118.25.63.70:80/shunluya/wechat/findCar',
 			header: {
 				'content-type': 'application/json' // 默认值
 			},
 			success: function (res) {
-				if(res.data.code === "200"){
+				if (res.data.code === "200") {
 					_this.setData({
-						findCarArr:res.data.data_carMsg
+						findCarArr: res.data.data_carMsg
 					})
-				} 
+				}
 			}
-		}) 
+		})
 		if (app.globalData.userInfo) {
 			this.setData({
 				userInfo: app.globalData.userInfo,
@@ -65,7 +65,7 @@ Page({
 			}
 		} else {
 			// 在没有 open-type=getUserInfo 版本的兼容处理
-			
+
 		}
 	},
 	tabClick: function (e) {
@@ -73,7 +73,7 @@ Page({
 			sliderOffset: e.currentTarget.offsetLeft,
 			activeIndex: e.currentTarget.id
 		});
-	}, 
+	},
 	getUserInfo: function (e) {
 		console.log(e)
 		app.globalData.userInfo = e.detail.userInfo
