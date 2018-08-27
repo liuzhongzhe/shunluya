@@ -20,7 +20,7 @@ App({
 						},
 						success: resp => {
 							wx.request({
-								url: 'http://118.25.63.70:80/shunluya//wechatUser/userLogin?openid=' + resp.data.openid,
+								url: 'http://118.25.63.70:80/shunluya/wechatUser/userLogin?openid=' + resp.data.openid,
 								method: 'POST',
 								success: response => {
 									this.globalData.token = response.data.data

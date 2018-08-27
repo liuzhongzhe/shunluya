@@ -1,9 +1,15 @@
-var app=getApp();
+var app = getApp();
 
 Page({
 	data: {
 		token: '',
-    loginShow:false,
+		loginShow: true,
+		userLogin: {
+			phone: '',
+			sex: '男',
+			check: '',
+			firstName: ""
+		},
 		addInfo: {
 			date: '2018-08-26',
 			time: '12:01',
@@ -30,11 +36,11 @@ Page({
 		},
 	},
 	onLoad: function () {
-		setTimeout(()=>{
-      _this.setData({
-        'token': app.globalData
-      })
-		},2000)
+		setTimeout(() => {
+			_this.setData({
+				'token': app.globalData.token
+			})
+		}, 1000)
 		let _this = this
 		wx.request({
 			url: 'http://118.25.63.70:80/shunluya/wechat/getAddress',
@@ -50,8 +56,12 @@ Page({
 			}
 		})
 	},
-	onLaunch: function () {
+	userLoginPhoneInput(e) {
+		this.setData({
+			'userLogin.phone': e.detail.value
+		})
 	},
+	onLaunch: function () {},
 	bindDateChange: function (e) {
 		let _this = this
 		this.setData({
@@ -66,8 +76,57 @@ Page({
 		console.log(_this.data.addInfo.time)
 	},
 	radioChange: function (e) {
+
 		this.setData({
 			'addInfo.respon_class': e.detail.value
+		})
+	},
+	userLoginSexChange: function (e) {
+		this.setData({
+			'userLogin.sex': e.detail.value
+		})
+	},
+	getCheck() {
+		if (!this.data.userLogin.phone) {
+			wx.showToast({
+				title: '请填写手机号码',
+				image: '../../images/error.png',
+				duration: 2000
+			});
+			return;
+		} else if (this.data.userLogin.phone) {
+			let re = /^1\d{10}$/
+			if (!re.test(this.data.userLogin.phone)) {
+				wx.showToast({
+					title: '手机格式错误',
+					image: '../../images/error.png',
+					duration: 2000
+				});
+				return;
+			}
+		}
+// 		wx.request({
+// 			url: 'http://118.25.63.70/shunluya/wechatUser/SendCheck?phone='+this.data.userLogin.phone,
+// 			method: 'POST',
+// 			header: {
+// 				'content-type': 'application/x-www-form-urlencoded',
+// 			},
+// 			success: function (res) {
+// 				console.log(res)
+// 			}
+// 		})
+		wx.request({
+			url: 'http://118.25.63.70/shunluya/wechatUser/SendCheck',
+			method: 'POST',
+			header: {
+				'content-type': 'application/x-www-form-urlencoded',
+			},
+			data:{
+				phone:this.data.userLogin.phone
+			},
+			success: function (res) {
+				console.log(res)
+			}
 		})
 	},
 	bindRegionChangeArrive: function (e) {
@@ -107,11 +166,13 @@ Page({
 		}
 	},
 	addItem: function () {
-    let _this = this
-    if(!_this.data.token){
-      this.data.loginShow=true
-      return
-    }
+		let _this = this
+		if (_this.data.token === '第一次登陆，需绑定手机号码！') {
+			this.setData({
+				'loginShow': true
+			})
+			return
+		}
 		let _data = _this.data.addInfo
 		wx.request({
 			url: 'http://118.25.63.70/shunluya/wechat/addMsg',
@@ -128,7 +189,7 @@ Page({
 				bag: _data.isBag,
 				lose: _data.isLose,
 				respon_class: 2,
-				token:this.data.token
+				token: this.data.token
 			},
 			success: function (res) {
 				console.log(res)
