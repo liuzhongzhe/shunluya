@@ -1,9 +1,9 @@
 var app = getApp();
-
 Page({
 	data: {
+		openid: "",
 		token: '',
-		loginShow: true,
+		loginShow: false,
 		userLogin: {
 			phone: '',
 			sex: '男',
@@ -35,7 +35,7 @@ Page({
 			respon_class: 1
 		},
 	},
-	onLoad: function () {
+	onLoad: function() {
 		setTimeout(() => {
 			_this.setData({
 				'token': app.globalData.token
@@ -47,7 +47,7 @@ Page({
 			header: {
 				'content-type': 'application/json' // 默认值
 			},
-			success: function (res) {
+			success: function(res) {
 				if (res.data.code === "200") {
 					_this.setData({
 						'addInfo.addressArr': res.data.data_address
@@ -61,32 +61,73 @@ Page({
 			'userLogin.phone': e.detail.value
 		})
 	},
-	onLaunch: function () {},
-	bindDateChange: function (e) {
-		let _this = this
+	onLaunch: function() {},
+	bindDateChange: function(e) {
 		this.setData({
 			'addInfo.date': e.detail.value
 		})
 	},
-	bindTimeChange: function (e) {
-		let _this = this
+	bindTimeChange: function(e) {
 		this.setData({
 			'addInfo.time': e.detail.value
 		})
-		console.log(_this.data.addInfo.time)
 	},
-	radioChange: function (e) {
-
+	radioChange: function(e) {
 		this.setData({
 			'addInfo.respon_class': e.detail.value
 		})
 	},
-	userLoginSexChange: function (e) {
+	userLoginSexChange: function(e) {
 		this.setData({
 			'userLogin.sex': e.detail.value
 		})
 	},
-	getCheck() {
+	closeLogin: function() {
+		this.setData({
+			'loginShow': false
+		})
+	},
+	toLogin: function() {
+		let _data = this.data.userLogin
+		let _this = this
+		wx.request({
+			url: 'http://118.25.63.70/shunluya/wechatUser/userFirst',
+			method: 'POST',
+			header: {
+				'content-type': 'application/x-www-form-urlencoded',
+			},
+			data: {
+				phone: _data.phone,
+				username: _data.firstName,
+				openid: this.data.openid,
+				check: _data.check,
+				sex: _data.sex,
+			},
+			success: function(res) {
+				console.log(res)
+				_this.setData({
+					"loginShow":false
+				})
+			}
+		})
+	},
+	getCheck: function(e) {
+		let _this = this;
+		wx.getStorage({
+			key: 'openid',
+			success: function(res) {
+				_this.setData({
+					"openid": res.data
+				})
+			},
+		},{
+			key: 'token',
+			success: function(res) {
+				_this.setData({
+					"token": res.data
+				})
+			},
+		})
 		if (!this.data.userLogin.phone) {
 			wx.showToast({
 				title: '请填写手机号码',
@@ -105,45 +146,37 @@ Page({
 				return;
 			}
 		}
-// 		wx.request({
-// 			url: 'http://118.25.63.70/shunluya/wechatUser/SendCheck?phone='+this.data.userLogin.phone,
-// 			method: 'POST',
-// 			header: {
-// 				'content-type': 'application/x-www-form-urlencoded',
-// 			},
-// 			success: function (res) {
-// 				console.log(res)
-// 			}
-// 		})
 		wx.request({
 			url: 'http://118.25.63.70/shunluya/wechatUser/SendCheck',
 			method: 'POST',
 			header: {
 				'content-type': 'application/x-www-form-urlencoded',
 			},
-			data:{
-				phone:this.data.userLogin.phone
+			data: {
+				phone: this.data.userLogin.phone
 			},
-			success: function (res) {
-				console.log(res)
+			success(res) {
+				_this.setData({
+					'userLogin.check': res.data.data
+				})
 			}
 		})
 	},
-	bindRegionChangeArrive: function (e) {
+	bindRegionChangeArrive: function(e) {
 		let _this = this
 		this.setData({
 			'addInfo.startAddressvalue': _this.data.addInfo.addressArr[e.detail.value].id,
 			'addInfo.startAddressName': _this.data.addInfo.addressArr[e.detail.value].address
 		})
 	},
-	bindRegionChangeGo: function (e) {
+	bindRegionChangeGo: function(e) {
 		let _this = this
 		this.setData({
 			'addInfo.endAddressvalue': _this.data.addInfo.addressArr[e.detail.value].id,
 			'addInfo.endAddressName': _this.data.addInfo.addressArr[e.detail.value].address
 		})
 	},
-	switch1Change: function (e) {
+	switch1Change: function(e) {
 		if (e.detail.value) {
 			this.setData({
 				'addInfo.isBag': 1
@@ -154,7 +187,7 @@ Page({
 			})
 		}
 	},
-	switch2Change: function (e) {
+	switch2Change: function(e) {
 		if (e.detail.value) {
 			this.setData({
 				'addInfo.isLose': 1
@@ -165,8 +198,17 @@ Page({
 			})
 		}
 	},
-	addItem: function () {
+	addItem: function() {
 		let _this = this
+		wx.getStorage({
+			key: 'token',
+			success: function(res) {
+				console.log(res.data)
+				_this.setData({
+					"token": res.data
+				})
+			},
+		})
 		if (_this.data.token === '第一次登陆，需绑定手机号码！') {
 			this.setData({
 				'loginShow': true
@@ -174,26 +216,29 @@ Page({
 			return
 		}
 		let _data = _this.data.addInfo
-		wx.request({
-			url: 'http://118.25.63.70/shunluya/wechat/addMsg',
-			method: 'POST',
-			header: {
-				'content-type': 'application/x-www-form-urlencoded',
-			},
-			data: {
-				date: _data.date,
-				hstime: _data.time,
-				peopleNumber: _data.busPeoNum,
-				startAddressvalue: _data.startAddressvalue,
-				endAddressvalue: _data.endAddressvalue,
-				bag: _data.isBag,
-				lose: _data.isLose,
-				respon_class: 2,
-				token: this.data.token
-			},
-			success: function (res) {
-				console.log(res)
-			}
+		setTimeout(()=>{
+			wx.request({
+				url: 'http://118.25.63.70/shunluya/wechat/addMsg',
+				method: 'POST',
+				header: {
+					'content-type': 'application/x-www-form-urlencoded',
+				},
+				data: {
+					date: _data.date,
+					hstime: _data.time,
+					peopleNumber: _data.busPeoNum,
+					startAddressvalue: _data.startAddressvalue,
+					endAddressvalue: _data.endAddressvalue,
+					bag: _data.isBag,
+					lose: _data.isLose,
+					respon_class: 2,
+					token: _this.data.token
+				},
+				success: function(res) {
+					console.log(res)
+				}
+			},200)
 		})
+		
 	}
 })

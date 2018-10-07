@@ -1,21 +1,33 @@
 <view class="release">
 	<view class="dialog_login_wrapper" wx:if="{{loginShow}}">
 		<view class="dialog_login">
-			<view style="text-align: center;">请绑定手机号码<icon type="cancel" style="float: right;margin-top: 5px;"/> </view>
-			 <input value="{{userLogin.phone}}"  bindblur="userLoginPhoneInput"  style="display: inline-block; height: 50px;"  class="weui-input" placeholder="请输入手机号码" />
-			 <button bindtap="getCheck" class="weui-btn mini-btn" type="primary" plain="true" style="margin-top: 10px; float: right; vertical-align: top; width: 80px;padding: 2px;" size="mini">发送验证码</button>
-			<input  value="{{userLogin.check}}" style="display: inline-block; height: 50px; line-height: 50px; min-height: 50px;" class="weui-input" placeholder="请输入验证码" />
-			<radio-group class="radio-group" bindchange="userLoginSexChange" style="display: inline-block; line-height: 50px;vertical-align: top; float: right;">
-				<label class="radio">
-					<radio value="男" checked="{{userLogin.sex}}" />男
-				</label>
-				<label class="radio">
-					<radio value="女" checked="{{userLogin.sex}}" />女
-				</label>
-			</radio-group>
-			<input value="{{userLogin.firstName}}"  style="display: inline-block; height: 30px;" class="weui-input" placeholder="贵姓" />
-			<button class="weui-btn" type="primary"style="float: right; margin-top: 10px; vertical-align: top; width: 80px;padding: 2px;" size="mini">确定</button>
+			<view style="text-align: center;">请绑定手机号码
+				<icon type="cancel" bindtap="closeLogin" style="float: right;margin-top: 5px;" />
+			</view>
+			<view>
+				<input value="{{userLogin.phone}}" bindblur="userLoginPhoneInput" style="display: inline-block; height: 50px;"
+				 class="weui-input" placeholder="请输入手机号码" />
+				<button bindtap="getCheck" class="weui-btn mini-btn" type="primary" plain="true" style="margin-top: 10px; float: right; vertical-align: top; width: 80px;padding: 2px;"
+				 size="mini">发送验证码</button>
 
+			</view>
+			<view>
+				<input value="{{userLogin.check}}" style="display: inline-block; height: 50px; line-height: 50px; min-height: 50px;"
+				 class="weui-input" placeholder="请输入验证码" />
+				<radio-group class="radio-group" bindchange="userLoginSexChange" style="display: inline-block; line-height: 50px;vertical-align: top; float: right;">
+					<label class="radio">
+						<radio value="男" checked="{{userLogin.sex}}" />男
+					</label>
+					<label class="radio">
+						<radio value="女" checked="{{userLogin.sex}}" />女
+					</label>
+				</radio-group>
+			</view>
+			<view>
+				<input value="{{userLogin.firstName}}" style="display: inline-block; height: 30px;" class="weui-input" placeholder="贵姓" />
+				<button bindtap="toLogin" class="weui-btn" type="primary" style="float: right; margin-top: 10px; vertical-align: top; width: 80px;padding: 2px;"
+				 size="mini">确定</button>
+			</view>
 		</view>
 	</view>
 	<view class="findCar">
@@ -28,7 +40,7 @@
 		</view>
 		<view class="sec">
 			<text class="section__title">出行日期</text>
-			<picker mode="date" value="{{addInfo.date}}" start="2018-08-20" end="2018-10-01" bindchange="bindDateChange" style="display: inline-block;margin-left: 10px;">
+			<picker mode="date" value="{{addInfo.date}}" start="2018-10-07" end="2019-10-01" bindchange="bindDateChange" style="display: inline-block;margin-left: 10px;">
 				<view class="picker">{{addInfo.date}}</view>
 			</picker>
 		</view>
@@ -52,7 +64,7 @@
 		<view class="sec">
 			<picker bindchange="bindRegionChangeGo" value="{{index}}" range="{{addInfo.addressGoArr}}">
 				<view class="picker">
-				到达地点：{{addInfo.endAddressName}}
+					到达地点：{{addInfo.endAddressName}}
 				</view>
 			</picker>
 		</view>
