@@ -9,7 +9,6 @@
 				 class="weui-input" placeholder="请输入手机号码" />
 				<button bindtap="getCheck" class="weui-btn mini-btn" type="primary" plain="true" style="margin-top: 10px; float: right; vertical-align: top; width: 80px;padding: 2px;"
 				 size="mini">发送验证码</button>
-
 			</view>
 			<view>
 				<input value="{{userLogin.check}}" style="display: inline-block; height: 50px; line-height: 50px; min-height: 50px;"
@@ -24,7 +23,7 @@
 				</radio-group>
 			</view>
 			<view>
-				<input value="{{userLogin.firstName}}" style="display: inline-block; height: 30px;" class="weui-input" placeholder="贵姓" />
+				<input value="{{userLogin.username}}" style="display: inline-block; height: 30px;" class="weui-input" placeholder="贵姓" />
 				<button bindtap="toLogin" class="weui-btn" type="primary" style="float: right; margin-top: 10px; vertical-align: top; width: 80px;padding: 2px;"
 				 size="mini">确定</button>
 			</view>

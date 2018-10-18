@@ -31,6 +31,9 @@ App({
 									wx.setStorage({
 										key: 'token',
 										data: response.data.data,
+									},{
+										key: 'codeState',
+										data: response.data.code,
 									})
 								}
 							})
