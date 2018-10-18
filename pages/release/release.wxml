@@ -13,12 +13,9 @@
 			<view>
 				<input value="{{userLogin.check}}" style="display: inline-block; height: 50px; line-height: 50px; min-height: 50px;"
 				 class="weui-input" placeholder="请输入验证码" />
-				<radio-group class="radio-group" bindchange="userLoginSexChange" style="display: inline-block; line-height: 50px;vertical-align: top; float: right;">
-					<label class="radio">
-						<radio value="男" checked="{{userLogin.sex}}" />男
-					</label>
-					<label class="radio">
-						<radio value="女" checked="{{userLogin.sex}}" />女
+				<radio-group class="radio-group" bindchange="userLoginSexChange" style="width: 120px;display: inline-block; line-height: 50px; vertical-align: top;">
+					<label class="radio" wx:for="{{items}}">
+						<radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
 					</label>
 				</radio-group>
 			</view>

@@ -5,6 +5,16 @@ Page({
 		token: '',
 		codeState: '',
 		loginShow: false,
+		items: [{
+				name: '男',
+				value: '男',
+				checked: 'true'
+			},
+			{
+				name: '女',
+				value: '女'
+			},
+		],
 		userLogin: {
 			phone: '',
 			sex: '男',
@@ -88,31 +98,34 @@ Page({
 			'loginShow': false
 		})
 	},
-		toLogin: function() {
-			let _data = this.data.userLogin
-			let _this = this
-			wx.request({
-				url: 'http://118.25.63.70/shunluya/wechatUser/userFirst',
-				method: 'POST',
-				header: {
-					'content-type': 'application/x-www-form-urlencoded',
-				},
-				data: {
-					phone: _data.phone,
-					username: _data.username,
-					openid: this.data.openid,
-					check: _data.check,
-					sex: _data.sex,
-					token: this.data.token
-				},
-				success: function(res) {
-					console.log(res)
-					_this.setData({
-						"loginShow":false
-					})
-				}
-			})
-		},
+	toLogin: function() {
+		let _data = this.data.userLogin
+		let _this = this
+		wx.request({
+			url: 'http://118.25.63.70/shunluya/wechatUser/userFirst',
+			method: 'POST',
+			header: {
+				'content-type': 'application/x-www-form-urlencoded',
+			},
+			data: {
+				phone: _data.phone,
+				username: _data.username,
+				openid: this.data.openid,
+				check: _data.check,
+				sex: _data.sex,
+				token: this.data.token
+			},
+			success: function(res) {
+				_this.setData({
+					"loginShow": false
+				})
+				wx.setStorage({
+					key: 'codeState',
+					data: 200,
+				})
+			}
+		})
+	},
 	getCheck: function(e) {
 		let _this = this;
 		if (!this.data.userLogin.phone) {
@@ -191,33 +204,6 @@ Page({
 	},
 	addItem: function() {
 		let _this = this
-		wx.getStorage({
-			key: 'openid',
-			success: function(res) {
-				_this.setData({
-					"openid": res.data
-				})
-			},
-		}, {
-			key: 'token',
-			success: function(res) {
-				_this.setData({
-					"token": res.data
-				})
-			},
-		})
-		if(_this.data.codeState){
-			
-		}else{
-			wx.getStorage({
-				key: 'codeState',
-				success: function(res) {
-					_this.setData({
-						"codeState": res.data
-					})
-				},
-			})
-		}
 		if (!this.data.addInfo.startAddressvalue) {
 			wx.showToast({
 				title: '请填写出发地点',
@@ -234,12 +220,36 @@ Page({
 			});
 			return;
 		}
-		if (_this.data.codeState === '400' || !_this.data.codeState) {
-			this.setData({
-				'loginShow': true
-			})
-			return
-		}
+		wx.getStorage({
+			key: 'openid',
+			success: function(res) {
+				_this.setData({
+					"openid": res.data
+				})
+			}
+		})
+		wx.getStorage({
+			key: 'token',
+			success: function(res) {
+				_this.setData({
+					"token": res.data
+				})
+			}
+		})
+		wx.getStorage({
+			key: 'codeState',
+			success: function(res) {
+				_this.setData({
+					"codeState": res.data
+				})
+				if (_this.data.codeState === '400' || !_this.data.codeState) {
+					this.setData({
+						'loginShow': true
+					})
+					return
+				}
+			},
+		})
 		let _data = _this.data.addInfo
 		setTimeout(() => {
 			wx.request({

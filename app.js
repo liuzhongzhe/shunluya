@@ -27,11 +27,13 @@ App({
 								url: 'http://118.25.63.70:80/shunluya/wechatUser/userLogin?openid=' + resp.data.openid,
 								method: 'POST',
 								success: response => {
+									console.log(response.data.code)
 									this.globalData.token = response.data.data
 									wx.setStorage({
 										key: 'token',
 										data: response.data.data,
-									},{
+									})
+									wx.setStorage({
 										key: 'codeState',
 										data: response.data.code,
 									})
