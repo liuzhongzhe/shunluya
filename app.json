@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/release/release",
 		"pages/index/index",
+		"pages/release/release",
     "pages/mine/mine",
     "pages/logs/logs"
   ],
@@ -9,11 +9,13 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#67BB62",
     "navigationBarTitleText": "顺路呀",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+		"enablePullDownRefresh":true
   },
   "tabBar": {
     "list": [
       {
+				"enablePullDownRefresh":true,
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "images/car.png",

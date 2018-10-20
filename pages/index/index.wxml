@@ -10,14 +10,17 @@
 				</block>
 				<view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
 			</view>
+			
 			<view class="weui-tab__panel">
+				 <!-- <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" > -->
 				<view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 					<view class="weui-panel weui-panel_access">
 						<view class="weui-panel__bd">
 							<navigator wx:for="{{findCarArr}}" wx:key="index" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
 								<view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
 									<view class="weui-media-box__title" style="font-size: 0.9em;">{{item.stratName}}-{{item.endName}}</view>
-									<view class="weui-media-box__desc">今天15:30
+									<view class="weui-media-box__desc">
+										<span>{{item.time}}</span>
 										<span style="margin-left: 0.6em;">{{item.peopleNumber}}人</span>
 										<span style="margin-left: 0.8em;">{{item.sex}}</span>
 									</view>
@@ -31,7 +34,6 @@
 									</view>
 								</view>
 								<view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-									<!-- <image class="weui-media-box__thumb" src="../../images/user.jpg" style="width: 45px; height: 45px; border-radius: 50%;" /> -->
 									<button style="padding: 0;padding-left: 4px;padding-right: 4px; margin-top: 15px;" class="weui-btn mini-btn" type="primary"
 									    size="mini">邀上车</button>
 								</view>
@@ -39,6 +41,7 @@
 						</view>
 					</view>
 				</view>
+				<!-- </scroll-view> -->
 				<view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 					<view class="weui-panel weui-panel_access">
 						<view class="weui-panel__bd">
@@ -59,8 +62,7 @@
 									</view>
 								</view>
 								<view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-									<!-- <image class="weui-media-box__thumb" src="../../images/user.jpg" style="width: 45px; height: 45px; border-radius: 50%;" /> -->
-									<button style="padding: 0;padding-left: 4px;padding-right: 4px; margin-top: 15px;" class="weui-btn mini-btn" type="primary"
+									<button  bindtap="wantCar" data-variable="{{item}}" style="padding: 0;padding-left: 4px;padding-right: 4px; margin-top: 15px;" class="weui-btn mini-btn" type="primary"
 									    size="mini">想上车</button>
 								</view>
 							</navigator>
@@ -68,6 +70,7 @@
 					</view>
 				</view>
 				<view class="weui-tab__content" hidden="{{activeIndex != 2}}">筛选</view>
+			 <!-- </scroll-view> -->
 			</view>
 		</view>
 	</view>

@@ -22,19 +22,9 @@ Page({
 			username: '刘'
 		},
 		addInfo: {
-			date: '2018-10-19',
+			date: '2018-10-22',
 			time: '12:01',
 			busPeoNum: 1,
-			types: [{
-					name: 2,
-					value: '人找车'
-				},
-				{
-					name: 1,
-					value: '车找人',
-					checked: 'true'
-				},
-			],
 			addressGoArr: ["石台", "池州", "铜陵", "安庆", "合肥", "贵池火车站"],
 			addressArr: [],
 			startAddressvalue: '',
@@ -43,7 +33,15 @@ Page({
 			endAddressName: '',
 			isBag: 0,
 			isLose: 0,
-			respon_class: 1
+			respon_class: 1,
+			types: [{
+				name: 2,
+				value: '人找车'
+			}, {
+				name: 1,
+				value: '车找人',
+				checked: 'true'
+			}]
 		},
 	},
 	onLoad: function() {
@@ -270,7 +268,11 @@ Page({
 					token: _this.data.token,
 				},
 				success: function(res) {
-					console.log(res)
+					wx.showToast({
+						title: '发布成功',
+						image: '../../images/success.png',
+						duration: 2000
+					});
 				}
 			}, 200)
 		})
