@@ -240,15 +240,15 @@ Page({
 				_this.setData({
 					"codeState": res.data
 				})
-
+        if (res.data === '400') {
+          _this.setData({
+            'loginShow': true
+          })
+          return;
+        }
 			}
 		})
-		if (_this.data.codeState === '400' || !_this.data.codeState) {
-			_this.setData({
-				'loginShow': true
-			})
-			return;
-		}
+	
 		let _data = _this.data.addInfo
 		setTimeout(() => {
 			wx.request({

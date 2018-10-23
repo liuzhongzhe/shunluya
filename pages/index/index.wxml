@@ -25,11 +25,11 @@
 										<span style="margin-left: 0.8em;">{{item.sex}}</span>
 									</view>
 									<view class="weui-media-box__desc" style="margin-top: 4px;">
-										<span wx:if="{{item.bag === 0}}">无行李</span>
+										<span wx:if="{{item.bag === 0}}" style="color: red;">无行李</span>
 										<span wx:if="{{item.bag === 1}}" style="color: red;">有行李</span>
 										<view style="margin-left: 5px; display: inline-block;">
-											<span wx:if="{{item.lose === 1}}">误差超过30分钟</span>
-											<span wx:if="{{item.lose === 0}}">误差小于30分钟</span>
+											<span wx:if="{{item.lose === 1}}" style="color: blue;">误差超过30分钟</span>
+											<span wx:if="{{item.lose === 0}}" style="color: blue;">误差小于30分钟</span>
 										</view>
 									</view>
 								</view>
