@@ -22,7 +22,7 @@ Page({
 			username: '刘'
 		},
 		addInfo: {
-			date: '2018-10-22',
+			date: '2018-10-25',
 			time: '12:01',
 			busPeoNum: 1,
 			addressGoArr: ["石台", "池州", "铜陵", "安庆", "合肥", "贵池火车站"],
@@ -240,14 +240,15 @@ Page({
 				_this.setData({
 					"codeState": res.data
 				})
-				if (_this.data.codeState === '400' || !_this.data.codeState) {
-					this.setData({
-						'loginShow': true
-					})
-					return
-				}
-			},
+
+			}
 		})
+		if (_this.data.codeState === '400' || !_this.data.codeState) {
+			_this.setData({
+				'loginShow': true
+			})
+			return;
+		}
 		let _data = _this.data.addInfo
 		setTimeout(() => {
 			wx.request({
