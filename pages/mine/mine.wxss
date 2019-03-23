@@ -4,6 +4,7 @@
 	height:100px;
 	background: rgb(103,187,98);
 	position: relative;
+  
 }
 .userInfo image{
 	width: 80px;
@@ -13,4 +14,34 @@
 	left: 50%;
 	bottom: -40px;
 	margin-left: -40px;
+}
+.myList{
+  margin-top: 40px;
+  font-size: 14px;
+  
+}
+.myList >view{
+  line-height: 40px;
+  margin-left:2em;
+  border-bottom: 1px solid #999999;
+  position: relative
+}
+.myList >view i{
+  position: absolute;
+  right: 2px;
+  color: #999999;
+}
+.myPublishList{
+  font-size: 14px;
+}
+.myPublishList .time{
+  display: block
+}
+.return{
+  font-size: 0;
+}
+.return image{
+  height: 30px;
+  width: 30px;
+  margin: 2px 5px;
 }

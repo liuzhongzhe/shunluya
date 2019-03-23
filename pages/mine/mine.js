@@ -1,77 +1,97 @@
 // pages/mine/mine.js
+var app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-		userInfo:{}
+    myPublishState:false,
+		userInfo:{},
+    myPublishArr:[],
+    token:'',
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
- onLoad: function (options) {
-    var _this=this;
-    /**
-     * 获取用户信息
-     */
-    wx.getUserInfo({
-      success:function(res){
-        _this.setData({
-         userInfo: res.userInfo
-        })
-				console.log(_this.data.userInfo)
-      }
-    })
+ onLoad: function () {
+ 
+    
 },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
-  },
+    var _this = this;
+    setTimeout(() => {
+      _this.setData({
+        'token': app.globalData.token
+      })
+      this.getMyOrder()
+    }, 1000)
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
+    /**
+     * 获取用户信息
+     */
+    wx.getUserInfo({
+      success: function (res) {
+        _this.setData({
+          userInfo: res.userInfo
+        })
+        console.log(_this.data.userInfo)
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
+  goBack:function(){
+    this.setData({
+      myPublishState: false
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
+  viewMyPub:function(){
+    
+    this.setData({
+      myPublishState: true
+    })
+    console.log(1)
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
+  getMyOrder: function () {
+    let _this = this
+    // wx.request({
+    //   url: 'http://118.25.63.70:80/shunluya/wechat/getMyOrder',
+    //   header: {
+    //     'content-type': 'application/json' // 默认值
+    //   },
+    //   success: function (res) {
+    //     console.log(res)
+    //     if (res.data.code === "200") {
+    //       _this.setData({
+    //         myOrderArr: res.data.data_carMsg
+    //       })
+    //       wx.hideNavigationBarLoading()
+    //     }
+    //   }
+    // })
+    wx.request({
+      url: 'http://118.25.63.70:80/shunluya/wechatUser/getMyMsg',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      data:{
+        'token': this.data.token
+      },
+      success: function (res) {
+        console.log(res)
+        if (res.data.code === "200") {
+          _this.setData({
+            myPublishArr: res.data.data.order
+          })
+          wx.hideNavigationBarLoading()
+        }
+      }
+    })
+    
   },
 })

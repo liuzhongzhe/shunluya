@@ -1,6 +1,38 @@
 <view>
-	<view class="userInfo">
+	<view class="userInfo"  wx:if="{{!myPublishState}}">
 		<image class="avatar" src='{{userInfo.avatarUrl}}'></image>
 	</view>
+	<view class='myList' wx:if="{{!myPublishState}}">
+    <view bindtap="viewMyPub">我的发布<i></i></view>
+    <view>我的订单<i></i></view>
+		
+	</view>
+  <view class='myPublishList' wx:if="{{myPublishState}}">
+  <view class='return'>
+    <image src='back.png' bindtap="goBack"> </image>
+  </view>
+
+    <navigator wx:for="{{myPublishArr}}"  wx:key="index"class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view>
+          <view wx:if="{{item.startId == 1}}">石台</view>
+          <view wx:if="{{item.startId == 2}}">池州</view>
+          <view wx:if="{{item.startId == 3}}">铜陵</view>
+          <view wx:if="{{item.startId == 4}}">安庆</view>
+          <view wx:if="{{item.startId == 5}}">合肥</view>
+          <view wx:if="{{item.startId == 6}}">贵池火车站</view>
+        </view>
+        
+        <view> - </view>
+        <view>
+          <view wx:if="{{item.endId == 1}}">石台</view>
+          <view wx:if="{{item.endId == 2}}">池州</view>
+          <view wx:if="{{item.endId == 3}}">铜陵</view>
+          <view wx:if="{{item.endId == 4}}">安庆</view>
+          <view wx:if="{{item.endId == 5}}">合肥</view>
+          <view wx:if="{{item.endId == 6}}">贵池火车站</view>
+        </view>
+        <block class="time">{{item.time}}</block>
+		</navigator>
+  </view>
 </view>
 
