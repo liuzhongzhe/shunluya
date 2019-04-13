@@ -7,8 +7,10 @@ Page({
    */
   data: {
     myPublishState:false,
+    myOrderState:false,
 		userInfo:{},
     myPublishArr:[],
+    myOrderArr:[],
     token:'',
 
   },
@@ -50,30 +52,38 @@ Page({
       myPublishState: false
     })
   },
+  viewMyOrder:function(){
+    this.setData({
+      myOrderState: false
+    })
+  },
   viewMyPub:function(){
     
     this.setData({
       myPublishState: true
     })
-    console.log(1)
+  
   },
   getMyOrder: function () {
     let _this = this
-    // wx.request({
-    //   url: 'http://118.25.63.70:80/shunluya/wechat/getMyOrder',
-    //   header: {
-    //     'content-type': 'application/json' // 默认值
-    //   },
-    //   success: function (res) {
-    //     console.log(res)
-    //     if (res.data.code === "200") {
-    //       _this.setData({
-    //         myOrderArr: res.data.data_carMsg
-    //       })
-    //       wx.hideNavigationBarLoading()
-    //     }
-    //   }
-    // })
+    wx.request({
+      url: 'http://118.25.63.70:80/shunluya/wechatUser/getMyOrder',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      data: {
+        'token': _this.data.token
+      },
+      success: function (res) {
+        if (res.data.code === "200") {
+          console.log(res.data)
+          _this.setData({
+            myOrderArr: res.data.data_carMsg
+          })
+          wx.hideNavigationBarLoading()
+        }
+      }
+    }),
     wx.request({
       url: 'http://118.25.63.70:80/shunluya/wechatUser/getMyMsg',
       header: {
@@ -83,7 +93,6 @@ Page({
         'token': this.data.token
       },
       success: function (res) {
-        console.log(res)
         if (res.data.code === "200") {
           _this.setData({
             myPublishArr: res.data.data.order

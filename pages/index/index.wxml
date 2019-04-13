@@ -16,7 +16,7 @@
 				<view class="weui-tab__content" hidden="{{activeIndex != 0}}">
 					<view class="weui-panel weui-panel_access">
 						<view class="weui-panel__bd">
-							<navigator wx:for="{{findCarArr}}" wx:key="index" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+							<view wx:for="{{findCarArr}}" wx:key="index" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
 								<view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
 									<view class="weui-media-box__title" style="font-size: 0.9em;">{{item.stratName}}-{{item.endName}}</view>
 									<view class="weui-media-box__desc">
@@ -34,10 +34,9 @@
 									</view>
 								</view>
 								<view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-									<button style="padding: 0;padding-left: 4px;padding-right: 4px; margin-top: 15px;" class="weui-btn mini-btn" type="primary"
-									    size="mini">邀上车</button>
+									<button bindtap='inviteCar' data-it='{{item}}' style="padding: 0;padding-left: 4px;padding-right: 4px; margin-top: 15px;" class="weui-btn mini-btn" type="primary"  size="mini">邀上车</button>
 								</view>
-							</navigator>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -48,22 +47,23 @@
 							<navigator wx:for="{{findPeopleArr}}" wx:key="index"class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
 								<view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
 									<view class="weui-media-box__title" style="font-size: 0.9em;">{{item.stratName}}-{{item.endName}}</view>
-									<view class="weui-media-box__desc">今天15:30
+									<view class="weui-media-box__desc">
+                    <span>{{item.time}}</span>
 										<span style="margin-left: 0.6em;">{{item.peopleNumber}}人</span>
 										<span style="margin-left: 0.8em;">{{item.sex}}</span>
 									</view>
 									<view class="weui-media-box__desc" style="margin-top: 4px;">
-										<span wx:if="{{item.bag === 0}}">无行李</span>
+										<span wx:if="{{item.bag === 0}}" style="color: red;">无行李</span>
 										<span wx:if="{{item.bag === 1}}" style="color: red;">有行李</span>
 										<view style="margin-left: 5px; display: inline-block;">
-											<span wx:if="{{item.lose === 1}}">误差超过30分钟</span>
-											<span wx:if="{{item.lose === 0}}">误差小于30分钟</span>
+											<span wx:if="{{item.lose === 1}}" style="color: blue;">误差超过30分钟</span>
+											<span wx:if="{{item.lose === 0}}" style="color: blue;">误差小于30分钟</span>
 										</view>
 									</view>
 								</view>
 								<view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
 									<button  bindtap="wantCar" data-variable="{{item}}" style="padding: 0;padding-left: 4px;padding-right: 4px; margin-top: 15px;" class="weui-btn mini-btn" type="primary"
-									    size="mini">想上车</button>
+									    size="mini" bindtap='wantCar' data-it='{{item}}'>想上车</button>
 								</view>
 							</navigator>
 						</view>

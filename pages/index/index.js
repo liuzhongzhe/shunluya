@@ -6,7 +6,7 @@ Page({
 		motto: 'Hello World',
 		userInfo: {},
 		hasUserInfo: false,
-		tabs: ["人找车", "车找人", "筛选"],
+    tabs: ["人找车", "车找人", "筛选"],
 		activeIndex: 0,
 		sliderOffset: 0,
 		sliderLeft: 0,
@@ -32,6 +32,49 @@ Page({
 			scrollTop: event.detail.scrollTop
 		});
 	},
+  inviteCar:function(it){
+    let _data = it.currentTarget.dataset.it
+    wx.request({
+      url: 'http://118.25.63.70:80/shunluya/UpDownCarwechat/UpCar',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'get',
+      data: {
+        MsgId: _data.id,
+        time: _data.time.slice(4),
+        startAddress: _data.startId,
+        endAddress: _data.endId,
+        token: app.globalData.token,
+        msg_class:1
+      },
+      success: function (res) {
+          console.log(res)    
+      }
+    })
+  },
+  wantCar:function(it){
+    console.log(it)
+    let _data = it.currentTarget.dataset.it
+    wx.request({
+      url: 'http://118.25.63.70:80/shunluya/UpDownCarwechat/UpCar',
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      method: 'get',
+      data: {
+        MsgId: _data.id,
+        time: _data.time.slice(4),
+        startAddress: _data.startId,
+        endAddress: _data.endId,
+        token: app.globalData.token,
+        msg_class: 0
+      },
+      success: function (res) {
+        console.log(res)
+      }
+    })
+  },
 	topLoad: function(event) {
 		loadMore(this);
 	},

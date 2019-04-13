@@ -4,7 +4,7 @@
 	</view>
 	<view class='myList' wx:if="{{!myPublishState}}">
     <view bindtap="viewMyPub">我的发布<i></i></view>
-    <view>我的订单<i></i></view>
+    <view bindtap='viewMyOrder'>我的订单<i></i></view>
 		
 	</view>
   <view class='myPublishList' wx:if="{{myPublishState}}">

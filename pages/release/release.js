@@ -37,10 +37,10 @@ Page({
 			respon_class: 1,
 			types: [{
 				name: 2,
-				value: '人找车'
+        value: '车找人'
 			}, {
 				name: 1,
-				value: '车找人',
+        value: '人找车',
 				checked: 'true'
 			}]
 		},
