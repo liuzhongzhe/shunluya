@@ -5,15 +5,15 @@
 	<view class='myList' wx:if="{{!myPublishState}}">
     <view bindtap="viewMyPub">我的发布<i></i></view>
     <view bindtap='viewMyOrder'>我的订单<i></i></view>
-		
+		 <view bindtap='modifyInfo'>修改信息<i></i></view>
 	</view>
   <view class='myPublishList' wx:if="{{myPublishState}}">
-  <view class='return'>
-    <image src='back.png' bindtap="goBack"> </image>
-  </view>
-
+    <view>
+    	<view bindtap="goBack" style=" width:50px;font-size: 16px;margin-left: 5px;">返回</view>
+    </view>
     <navigator wx:for="{{myPublishArr}}"  wx:key="index"class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-        <view>
+        
+				<view>
           <view wx:if="{{item.startId == 1}}">石台</view>
           <view wx:if="{{item.startId == 2}}">池州</view>
           <view wx:if="{{item.startId == 3}}">铜陵</view>
@@ -21,7 +21,6 @@
           <view wx:if="{{item.startId == 5}}">合肥</view>
           <view wx:if="{{item.startId == 6}}">贵池火车站</view>
         </view>
-        
         <view> - </view>
         <view>
           <view wx:if="{{item.endId == 1}}">石台</view>
@@ -34,5 +33,32 @@
         <block class="time">{{item.time}}</block>
 		</navigator>
   </view>
+	<view class="dialog_login_wrapper" wx:if="{{modifyInfoState}}">
+		<view class="dialog_login">
+			<view style="text-align: center;">请绑定手机号码
+				<icon type="cancel" bindtap="closeLogin" style="float: right;margin-top: 5px;" />
+			</view>
+			<view>
+				<input value="{{userLogin.phone}}" bindblur="userLoginPhoneInput" style="display: inline-block; height: 50px;"
+				 class="weui-input" placeholder="请输入手机号码" />
+				<button bindtap="getCheck" class="weui-btn mini-btn" type="primary" plain="true" style="margin-top: 10px; float: right; vertical-align: top; width: 80px;padding: 2px;"
+				 size="mini">发送验证码</button>
+			</view>
+			<view>
+				<input value="{{userLogin.check}}" style="display: inline-block; height: 50px; line-height: 50px; min-height: 50px;"
+				 class="weui-input" placeholder="请输入验证码" />
+				<radio-group class="radio-group" bindchange="userLoginSexChange" style="width: 120px;display: inline-block; line-height: 50px; vertical-align: top;">
+					<label class="radio" wx:for="{{items}}">
+						<radio value="{{item.name}}" checked="{{item.checked}}" />{{item.value}}
+					</label>
+				</radio-group>
+			</view>
+			<view>
+				<input value="{{userLogin.username}}" style="display: inline-block; height: 30px;" class="weui-input" placeholder="贵姓" />
+				<button bindtap="toLogin" class="weui-btn" type="primary" style="float: right; margin-top: 10px; vertical-align: top; width: 80px;padding: 2px;"
+				 size="mini">确定</button>
+			</view>
+		</view>
+	</view>
 </view>
 

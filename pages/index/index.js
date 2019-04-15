@@ -32,27 +32,6 @@ Page({
 			scrollTop: event.detail.scrollTop
 		});
 	},
-  inviteCar:function(it){
-    let _data = it.currentTarget.dataset.it
-    wx.request({
-      url: 'http://118.25.63.70:80/shunluya/UpDownCarwechat/UpCar',
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      method: 'get',
-      data: {
-        MsgId: _data.id,
-        time: _data.time.slice(4),
-        startAddress: _data.startId,
-        endAddress: _data.endId,
-        token: app.globalData.token,
-        msg_class:1
-      },
-      success: function (res) {
-          console.log(res)    
-      }
-    })
-  },
   wantCar:function(it){
     console.log(it)
     let _data = it.currentTarget.dataset.it
@@ -111,6 +90,9 @@ Page({
 			header: {
 				'content-type': 'application/json' // 默认值
 			},
+			data: {
+				token:app.globalData.token
+			},
 			success: function(res) {
 				if (res.data.code === "200") {
 					_this.setData({
@@ -127,6 +109,9 @@ Page({
 			url: 'http://118.25.63.70:80/shunluya/wechat/findCar',
 			header: {
 				'content-type': 'application/json' // 默认值
+			},
+			data: {
+				token:app.globalData.token
 			},
 			success: function(res) {
 				if (res.data.code === "200") {
@@ -150,15 +135,12 @@ Page({
 				MsgId: _data.id,
 				time: _data.time.slice(4),
 				startAddress: _data.startId,
-				endAddress: _data.endId
+				endAddress: _data.endId,
+				token: app.globalData.token,
+				msg_class:0
 			},
 			success: function(res) {
-				if (res.data.code === "200") {
-					_this.setData({
-						findCarArr: res.data.data_carMsg
-					})
-					wx.hideNavigationBarLoading()
-				}
+				console.log(res)
 			}
 		})
 	},
@@ -168,5 +150,34 @@ Page({
 			userInfo: e.detail.userInfo,
 			hasUserInfo: true
 		})
-	}
+	},
+	inviteCar:function(e){
+		let _data = e.currentTarget.dataset.it
+		console.log(_data)
+		wx.request({
+			url: 'http://118.25.63.70:80/shunluya/UpDownCarwechat/upCar',
+			header: {
+				'content-type': 'application/json' // 默认值
+			},
+			method: 'POST',
+			data: {
+				MsgId: _data.id,
+				time: _data.time.slice(4),
+				startAddress: _data.startId,
+				endAddress: _data.endId,
+				token: app.globalData.token,
+				msg_class:1
+			},
+			success: function(res) {
+				console.log(res)
+// 				if (res.data.code === "200") {
+// 					_this.setData({
+// 						findCarArr: res.data.data_carMsg
+// 					})
+// 					wx.hideNavigationBarLoading()
+// 				}
+			}
+		})
+	},
+	
 })

@@ -8,6 +8,7 @@ Page({
   data: {
     myPublishState:false,
     myOrderState:false,
+		modifyInfoState:false,
 		userInfo:{},
     myPublishArr:[],
     myOrderArr:[],
@@ -58,12 +59,20 @@ Page({
     })
   },
   viewMyPub:function(){
-    
     this.setData({
       myPublishState: true
     })
-  
   },
+  modifyInfo:function(){
+		this.setData({
+		  modifyInfoState: true
+		})
+  },
+	closeLogin:function(){
+		this.setData({
+		  modifyInfoState: false
+		})
+	},
   getMyOrder: function () {
     let _this = this
     wx.request({

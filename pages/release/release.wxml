@@ -46,9 +46,12 @@
 				<view class="picker">{{addInfo.time}}</view>
 			</picker>
 		</view>
-		<view class="sec">
-			<text>乘车人数</text>
-			<input type="number" style="display: inline-block;vertical-align:top;margin-left:10px;" value="{{addInfo.busPeoNum}}" />
+			<view class="sec">
+			<picker bindchange="bindRegionChangePeoNum" value="{{index}}" range="{{addInfo.peoNumArr}}">
+				<view class="picker">
+					乘车人数：{{addInfo.busPeoNum}}
+				</view>
+			</picker>
 		</view>
 		<view class="sec">
 			<picker bindchange="bindRegionChangeArrive" value="{{index}}" range="{{addInfo.addressGoArr}}">
